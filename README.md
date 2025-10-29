@@ -36,3 +36,10 @@ No need to manage user sync profile manually, let SwiftData do the work
 Use local notifications without maintaining ReminderSchedule table
 Remove sortGroupToken and syncState related properties as SwiftData will take care of them
 ```
+
+### 4. 執行 `/speckit.tasks` 產出「雲端同步與排序體驗」的分階段任務清單，涵蓋同步、排序、提醒三大使用者故事與測試計畫，輸出至 `specs/001-sync-ideas-cloud/tasks.md`。
+
+```
+/speckit.tasks
+Follow instructions in speckit.tasks.prompt.md
+```
