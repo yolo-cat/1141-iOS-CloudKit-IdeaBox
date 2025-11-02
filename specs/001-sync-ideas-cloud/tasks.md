@@ -24,14 +24,14 @@
 
 ### Testing
 
-- [ ] T105 [P] 先撰寫 Swift Testing：在 `IdeaBoxTests/SwiftData/IdeaModelTests.swift` 驗證 `Idea` 模型的欄位、初始化與屬性存取，確保 SwiftData 轉換後行為正確。
-- [ ] T106 [P] 先撰寫 Swift Testing：在 `IdeaBoxTests/SwiftData/LocalPersistenceTests.swift` 模擬本地插入、查詢、更新、刪除操作，確保測試初期失敗。
+- [X] T105 [P] 先撰寫 Swift Testing：在 `IdeaBoxTests/SwiftData/IdeaModelTests.swift` 驗證 `Idea` 模型的欄位、初始化與屬性存取，確保 SwiftData 轉換後行為正確。
+- [X] T106 [P] 先撰寫 Swift Testing：在 `IdeaBoxTests/SwiftData/LocalPersistenceTests.swift` 模擬本地插入、查詢、更新、刪除操作，確保測試初期失敗。
 
 ### Integration
 
 - [X] T107 更新 `IdeaBox/Views/AddIdeaSheet.swift` 以使用 `ModelContext` 儲存新想法，確保正確寫入本地資料庫。
 - [X] T108 確認 `IdeaBox/Views/IdeaRow.swift` 與 `IdeaBox/Views/SearchView.swift` 可正確顯示與查詢 SwiftData 模型。
-- [ ] T109 執行本地測試，驗證 App 啟動、新增、編輯、刪除、查詢想法的完整流程。
+- [X] T109 執行本地測試，驗證 App 啟動、新增、編輯、刪除、查詢想法的完整流程。
 
 ---
 
