@@ -43,10 +43,10 @@ Remove sortGroupToken and syncState related properties as SwiftData will take ca
 /speckit.tasks
 ```
 
-### 5. 執行 `/speckit.implement` 實作 Category 2 - iCloud 同步基礎建設 (部分完成: T202-T206)
+### 5. 執行 `/speckit.implement` 實作 Category 2 - iCloud 同步基礎配置 (T202-T203 已完成)
 ```
 /speckit.implement
-Continue Category 2 implementation
+Configure iCloud sync with SwiftData
 ```
 
 **完成項目**:
@@ -57,31 +57,17 @@ Continue Category 2 implementation
 - ✅ T203: 更新 `IdeaBoxApp.swift` 的 `ModelContainer` 配置為 CloudKit 自動同步
   - 使用 `ModelConfiguration(cloudKitDatabase: .automatic)` 啟用 iCloud 同步
   - 保持本地持久化與雲端同步並行運作
-- ✅ T204: 實作 `CloudSyncCoordinator` 服務 (`IdeaBox/Services/Sync/CloudSyncCoordinator.swift`)
-  - 提供 `triggerSync()` 與 `retrySync()` 方法
-  - 簡化架構：SwiftData 自動處理同步狀態，無需手動追蹤
-- ✅ T205: 實作 `IdeaSyncService` (`IdeaBox/Services/Sync/IdeaSyncService.swift`)
-  - 封裝同步觸發與重試邏輯
-  - 自動重試機制：30 秒後重試失敗的同步操作
-  - 準備整合 `swift-dependencies` 以提升測試性
-- ✅ T206: 實作 `SyncStatusPresenter` (`IdeaBox/Services/Sync/SyncStatusPresenter.swift`)
-  - 使用 `@Observable` 提供 UI 同步狀態
-  - 顯示中文時間格式（剛剛、N分鐘前、N小時前、昨天、N天前）
-  - 提供 `statusText`, `statusIcon`, `statusColor` 給 SwiftUI 視圖
 
 **技術重點**:
 - CloudKit 整合透過 SwiftData 原生支援（`.automatic` 配置）
-- 移除 `Idea` 模型中的 `lastSyncedAt` 與 `lastSyncError` 欄位
-  - SwiftData metadata 自動管理同步狀態
-  - 簡化資料模型，避免冗餘追蹤
-- 模組化架構：Sync 服務分層（Coordinator → Service → Presenter）
-- 準備整合 Point-Free `swift-dependencies` 以提升依賴注入與測試能力
+- SwiftData 自動處理同步狀態，無需手動追蹤
+- 基本同步功能已就緒，進階 UI 與服務層將在後續迭代實作
 
-**待完成項目** (T201, T207-T212):
-- T201: 透過 SPM 新增 `swift-dependencies`
-- T207-T212: UI 整合（同步狀態視圖、手動觸發、錯誤處理、測試）
+**待完成項目** (T201, T204-T212):
+- T201: SPM 依賴管理 (swift-dependencies)
+- T207-T212: UI 整合與測試
 
-**下一步**: 整合 `swift-dependencies` (T201) 並完成同步 UI 與測試 (T207-T212)
+**下一步**: SwiftData + iCloud 基礎同步已配置完成，可開始測試基本跨裝置同步功能
 
 ---
 

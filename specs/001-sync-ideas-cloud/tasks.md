@@ -45,11 +45,11 @@
 - [X] T202 在 `IdeaBox.xcodeproj/project.pbxproj` 啟用 iCloud (CloudKit) 與 Push Notifications 能力，必要時建立 `IdeaBox/IdeaBox.entitlements` 以指向正確的 CloudKit container。
 - [X] T203 更新 `IdeaBox/IdeaBoxApp.swift` 中的 `ModelContainer` 配置，改為指向共用 CloudKit container（使用 `.cloud` 配置），啟用自動同步與衝突解決。
 
-### Sync Service Implementation
+### Sync Service Implementation (skipped)
 
-- [X] T204 [P] 實作 `IdeaBox/Services/Sync/CloudSyncCoordinator.swift`，運用 SwiftData 變更佇列與時間戳處理上行／下行同步、變更追蹤與錯誤紀錄。
-- [X] T205 [P] 建立 `IdeaBox/Services/Sync/IdeaSyncService.swift`，封裝同步觸發、重試排程與依賴注入（整合 `swift-dependencies`），監聽 `ModelContext` 變更事件。
-- [X] T206 [P] 建立 `IdeaBox/Services/Sync/SyncStatusPresenter.swift` 以產出同步狀態與錯誤訊息，並確保可在 SwiftUI 檢視中監聽更新；暴露 `@Observable` 物件。
+- T204 [P] 實作 `IdeaBox/Services/Sync/CloudSyncCoordinator.swift`，運用 SwiftData 變更佇列與時間戳處理上行／下行同步、變更追蹤與錯誤紀錄。
+- T205 [P] 建立 `IdeaBox/Services/Sync/IdeaSyncService.swift`，封裝同步觸發、重試排程與依賴注入（整合 `swift-dependencies`），監聽 `ModelContext` 變更事件。
+- T206 [P] 建立 `IdeaBox/Services/Sync/SyncStatusPresenter.swift` 以產出同步狀態與錯誤訊息，並確保可在 SwiftUI 檢視中監聽更新；暴露 `@Observable` 物件。
 
 ### UI Integration
 
