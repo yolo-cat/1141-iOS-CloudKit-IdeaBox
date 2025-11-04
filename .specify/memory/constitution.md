@@ -1,50 +1,165 @@
-# [PROJECT_NAME] Constitution
-<!-- Example: Spec Constitution, TaskFlow Constitution, etc. -->
+<!-- 
+同步影響報告：IdeaBox 憲法 v1.1.0 → v1.2.0
+版本異動：MINOR (新增 speckit 文件語言原則) | 日期：2025-11-04
 
-## Core Principles
+變更摘要：
+- v1.0.0 (2025-11-04)：為 IdeaBox iOS 專案建立初始憲法
+  * 確立 5 項核心開發原則，針對 iOS SwiftUI 開發客製化
+  * 新增技術標準章節，涵蓋 iOS 特定需求
+  * 新增開發工作流程章節，定義審查和測試閘門
+  
+- v1.1.0 (2025-11-04)：新增台灣正體中文本地化原則
+  * 新增原則 VI：台灣正體中文 (繁體中文) 優先本地化
+  * 理由：本地化必須在系統層級上設計，不能事後補救
+  
+- v1.2.0 (2025-11-04)：新增 speckit 文件語言需求
+  * 新增原則 VII：Speckit 文件使用台灣正體中文
+  * 所有 .specify/ 中的計畫、規格、任務、設計文件必須使用台灣正體中文
+  * 理由：確保團隊一致性並消除需求中的語言歧異
+  
+新增原則：
+- 原則 VI：台灣正體中文 (繁體中文) 優先本地化
+- 原則 VII：Speckit 文件使用台灣正體中文 (繁體中文)
 
-### [PRINCIPLE_1_NAME]
-<!-- Example: I. Library-First -->
-[PRINCIPLE_1_DESCRIPTION]
-<!-- Example: Every feature starts as a standalone library; Libraries must be self-contained, independently testable, documented; Clear purpose required - no organizational-only libraries -->
+更新章節：
+- 平台與相依套件：新增「文件語言」需求
+- 程式碼審查檢查清單：新增 speckit 語言合規檢查
+- 憲法權威性：更新以參考 7 項原則 (I–VII)
+- 合規審查：新增 speckit 語言驗證需求
 
-### [PRINCIPLE_2_NAME]
-<!-- Example: II. CLI Interface -->
-[PRINCIPLE_2_DESCRIPTION]
-<!-- Example: Every library exposes functionality via CLI; Text in/out protocol: stdin/args → stdout, errors → stderr; Support JSON + human-readable formats -->
+需要採取行動的範本：✅ 已完成
+- .specify/templates/plan-template.md — 已新增台灣正體中文需求備註
+- .specify/templates/spec-template.md — 已新增台灣正體中文需求備註
+- .specify/templates/tasks-template.md — 已新增台灣正體中文需求備註
 
-### [PRINCIPLE_3_NAME]
-<!-- Example: III. Test-First (NON-NEGOTIABLE) -->
-[PRINCIPLE_3_DESCRIPTION]
-<!-- Example: TDD mandatory: Tests written → User approved → Tests fail → Then implement; Red-Green-Refactor cycle strictly enforced -->
+後續：範本已更新，使用者會被提醒輸出必須使用台灣正體中文
 
-### [PRINCIPLE_4_NAME]
-<!-- Example: IV. Integration Testing -->
-[PRINCIPLE_4_DESCRIPTION]
-<!-- Example: Focus areas requiring integration tests: New library contract tests, Contract changes, Inter-service communication, Shared schemas -->
+-->
 
-### [PRINCIPLE_5_NAME]
-<!-- Example: V. Observability, VI. Versioning & Breaking Changes, VII. Simplicity -->
-[PRINCIPLE_5_DESCRIPTION]
-<!-- Example: Text I/O ensures debuggability; Structured logging required; Or: MAJOR.MINOR.BUILD format; Or: Start simple, YAGNI principles -->
+# IdeaBox 憲法
 
-## [SECTION_2_NAME]
-<!-- Example: Additional Constraints, Security Requirements, Performance Standards, etc. -->
+## 核心原則
 
-[SECTION_2_CONTENT]
-<!-- Example: Technology stack requirements, compliance standards, deployment policies, etc. -->
+### I. 優先使用原生 SwiftUI
+每項功能都必須使用現代 SwiftUI API 和模式。禁止 UIKit 包裝、禁止舊版 UIViewRepresentable 變通方案（技術上無法避免除外）。必須使用現代 API：用 `@Observable` 巨集取代 `ObservableObject`、用 `NavigationStack` 取代 `NavigationView`、用 `foregroundStyle()` 取代 `foregroundColor()`、使用雙參數 `onChange(of:)` 進行狀態觀察。
 
-## [SECTION_3_NAME]
-<!-- Example: Development Workflow, Review Process, Quality Gates, etc. -->
+**理由**：維持 iOS 26+ 生態系統的一致性；使維護更容易；確保團隊能理解和修改所有程式碼。舊版模式會分割程式碼庫，增加審查和除錯時的認知負擔。
 
-[SECTION_3_CONTENT]
-<!-- Example: Code review requirements, testing gates, deployment approval process, etc. -->
+### II. 液態玻璃視覺一致性
+所有 UI 元素都必須使用液態玻璃材質 (iOS 26+)，呈現透明性、深度和現代視覺效果。卡片、表單、背景和容器元素都必須納入材質效果，以建立連貫、高級的外觀。這不是選填的視覺修飾——它是產品識別的基礎。
 
-## Governance
-<!-- Example: Constitution supersedes all other practices; Amendments require documentation, approval, migration plan -->
+**理由**：液態玻璃是 iOS 26 的定義視覺語言；使用者期望這種美學效果。不一致的材質應用會造成感受到產品未完成的狀態。材質選擇 (`.regular`、`.thin`、`.ultraThin` 等) 必須記錄在設計決策中。
 
-[GOVERNANCE_RULES]
-<!-- Example: All PRs/reviews must verify compliance; Complexity must be justified; Use [GUIDANCE_FILE] for runtime development guidance -->
+### III. 測試優先的使用者流程 (驗收時不可協商)
+使用者驗收測試必須在功能實作開始前撰寫且失敗。模型和服務的單元測試強烈建議採用。測試導向開發 (TDD) 對所有使用者可見功能和資料持久化是強制性的。對每個使用者故事：寫測試 → 驗證失敗 → 實作 → 驗證通過。
 
-**Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
-<!-- Example: Version: 2.1.1 | Ratified: 2025-06-13 | Last Amended: 2025-07-16 -->
+**理由**：確保功能在撰寫程式碼前符合需求。防止範圍擴張。使用者流程是設計和實作之間的合約。單元測試為重構和除錯提供安全網。
+
+### IV. 元件可重用性與關注點分離
+SwiftUI 視圖必須由小的、單一職責元件組成。每個視圖檔案 (`.swift`) 應該有一個主視圖或緊密相關的元件群組。共享狀態透過 `@Binding` 或環境傳遞；任何視圖檔案都禁止直接相依於另一個視圖檔案的內部狀態。模型、服務和視圖保持嚴格分離。
+
+**理由**：使獨立測試、跨標籤/螢幕可重用性和可維護性成為可能。視圖之間的循環相依關係會產生錯誤，並使重構變得危險。清晰的結構使新團隊成員能夠快速找到和修改功能。
+
+### V. 資料模型完整性與持久化階段
+資料模型 (`Identifiable`、可雜湊、必要時 `Codable`) 必須在視圖實作前定義。階段進度為：模擬資料 → 記憶體內狀態 → SwiftData 持久化 → 雲端同步。每個階段在前進前必須獨立可測試。任何視圖都禁止直接接觸持久化層——所有資料流都透過服務/視圖模型。
+
+**理由**：分離關注點能夠在不改變 UI 的情況下交換儲存後端。模擬資料能在持久化準備好前實現平行開發。清晰的分層防止資料損壞，使測試具有確定性。
+
+### VI. 台灣正體中文 (繁體中文) 優先本地化
+所有使用者可見的文字、日期、數字和貨幣必須從一開始就使用 iOS 地區設定支援 (`Locale(identifier: "zh-Hant-TW")`)，而不是事後補救。字串字面量必須使用 `String(localized:)` 或 `.localizable.stringdict` 以進行適當的本地化。日期格式必須尊重台灣日曆慣例。標點和排版必須遵循台灣正體中文標準（不使用簡體中文變體，正確使用傳統標點符號如 ｜、，。）。
+
+**理由**：台灣市場是主要目標；本地化不能是事後想法。將本地化改裝到現有程式碼會造成錯誤、不一致和不可翻譯的 UI。從一開始就建置地區感知確保日期顯示正確（沒有格式化意外）、複數形式運作，以及 UI 正確展開中文文字。團隊必須尊重台灣慣例；使用簡體中文或通用中文是不可接受的。
+
+### VII. Speckit 文件使用台灣正體中文 (繁體中文)
+所有 speckit 檔案 (`.specify/templates/`、`.specify/memory/`) 包括計畫、規格、任務列表和設計文件都必須專門用台灣正體中文 (繁體中文) 撰寫。這包括所有範本註解、指導備註、範例和文件。不允許僅英文文件在 speckit 中；Swift 中的程式碼註解可以是英文或正體中文，但使用者可見的功能規格必須是台灣正體中文。
+
+**理由**：Speckit 是團隊功能對齊的主要溝通工具。使用台灣正體中文確保所有團隊成員——無論英文熟練度如何——都能理解需求、任務定義和設計決策。文件語言的一致性消除歧異、減少翻譯錯誤，並將台灣市場確立為主要設計中心。在 speckit 中混合語言會造成認知負擔和需求理解的潛在誤解。
+
+## 技術標準
+
+### 平台與相依套件
+- **目標**：iOS 26+ (2025+)
+- **語言**：Swift 6.2+
+- **框架**：SwiftUI (獨佔)
+- **狀態管理**：`@Observable` 巨集
+- **資料模型**：Swift 結構體，具有 `Identifiable`、`Codable`
+- **測試**：XCTest (UITests) + 單元測試
+- **導航**：`NavigationStack` + `NavigationDestination`
+- **材質**：液態玻璃材質 (`.regular`、`.thin`、`.ultraThin`)
+- **本地化**：台灣正體中文 (zh-Hant-TW) 主要地區；`.stringdict` 用於複數形式；`Locale(identifier: "zh-Hant-TW")` 用於日期/數字格式
+- **文件語言**：所有 speckit 檔案 (計畫、規格、任務) 必須用台灣正體中文 (繁體中文) 撰寫
+
+### 效能需求
+- 應用啟動：iPhone 16 上 < 1 秒
+- 列表滾動：100+ 想法時穩定 60 fps
+- 核取方塊切換：立即視覺回饋 (< 16ms)
+- 搜尋篩選：1000+ 項目時實時回應 < 100ms
+- 記憶體：無記憶體洩漏，檢視消除時清理
+
+### 無障礙基準 (不可協商)
+- 所有互動元素必須有 VoiceOver 標籤
+- 核取方塊必須宣告狀態 (已選/未選)
+- 色彩對比必須符合 WCAG AA 標準
+- 需要動態類型支援——文字必須縮放 200%
+- 按鈕必須有最小 44pt 觸摸目標
+
+## 開發工作流程
+
+### 程式碼組織
+- **模型** (`/IdeaBox/Models/`)：資料結構、模擬資料
+- **視圖** (`/IdeaBox/Views/`)：UI 元件、表單、標籤頁
+- **資源** (`/IdeaBox/Assets.xcassets/`)：圖示、顏色、應用圖示
+- **測試** (`/IdeaBoxTests/`、`/IdeaBoxUITests/`)：單元 + UI 測試套件
+
+### 功能開發閘門
+1. **規格**：撰寫功能規格 (使用者故事、需求、驗收條件)
+2. **設計**：記錄元件結構；決定材質選擇
+3. **測試**：撰寫驗收測試且失敗
+4. **實作**：撰寫程式碼以通過測試
+5. **審查**：程式碼審查驗證：(a) 憲法合規性、(b) 所有測試通過、(c) 無視覺迴歸
+6. **合併**：功能準備好整合或發行
+
+### 程式碼審查檢查清單
+- [ ] 使用現代 SwiftUI API (無 UIKit、使用 `@Observable` 等)
+- [ ] 套用液態玻璃材質 (如有可見 UI)
+- [ ] 所有測試在本地通過
+- [ ] 包含驗收測試且通過
+- [ ] 無除錯列印或註解程式碼
+- [ ] 互動元素具有 VoiceOver 標籤
+- [ ] 無記憶體洩漏 (新增持久化時使用 Instruments 驗證)
+- [ ] 深色模式已驗證 (在淺色 + 深色中測試)
+- [ ] 套用台灣正體中文 (繁體中文) 本地化：使用 `String(localized:)`，日期使用 `Locale(identifier: "zh-Hant-TW")`
+- [ ] 若新增/更新設計/規格文件：用台灣正體中文 (繁體中文) 撰寫，符合原則 VII
+- [ ] 尊重憲法原則 I–VII
+
+### 分支與提交
+- 分支命名：`###-feature-name` (例如 `101-add-idea-sheet`)
+- 提交訊息：描述性、包含驗收測試狀態
+- PR：參考 spec.md 和使用者故事 (例如「實作使用者故事 1：新增想法表單」)
+
+## 治理
+
+### 憲法權威性
+本憲法對所有先前的非正式慣例具有完全優先權。所有 PR、程式碼審查和設計決策都必須符合七項核心原則 (I–VII)。超越這些原則引入的複雜性必須以書面正當化 (PR 中的評論、plan.md 中的文件)，並探索更簡單的替代方案。
+
+### 修訂程序
+憲法修訂需要：
+1. GitHub 議題說明變更和理由
+2. 團隊共識 (或專案負責人決定)
+3. 根據語意版本控制進行版本異動 (原則變更為 MAJOR、新增標準為 MINOR、澄清為 PATCH)
+4. 更新此檔案 + 預置同步報告
+5. 如有影響，更新範本 (plan.md、spec.md、tasks.md)
+
+### 合規審查
+- 每個 PR 在合併前都針對本憲法進行審查
+- 使用 CLAUDE.md 取得執行時指導和工具特定備註
+- .specify/ 中的設計文件必須按編號參考原則 (例如「原則 III：測試優先」)
+- .specify/ 中的所有設計文件、規格、計畫和任務必須用台灣正體中文 (繁體中文) 撰寫
+- 季度審查本文件；標記過時的標準
+
+### 版本控制原則
+- **MAJOR**：核心原則新增/移除/重新定義 (例如「SwiftUI 優先」變為「SwiftUI 或 UIKit 靈活」)
+- **MINOR**：新增標準或原則經澄清具有重大影響 (例如記錄材質類型)
+- **PATCH**：措辭澄清、拼寫錯誤修正、非語意精進
+
+**版本**：1.2.0 | **批准日期**：2025-11-04 | **最後修訂日期**：2025-11-04

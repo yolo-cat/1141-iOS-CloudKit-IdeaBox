@@ -1,101 +1,103 @@
 ---
 
-description: "Task list template for feature implementation"
+description: "功能實作的任務列表範本"
 ---
 
-# Tasks: [FEATURE NAME]
+# 任務：[功能名稱]
 
-**Input**: Design documents from `/specs/[###-feature-name]/`
-**Prerequisites**: plan.md (required), spec.md (required for user stories), research.md, data-model.md, contracts/
+**輸入**: 來自 `/specs/[###-feature-name]/` 的設計文件  
+**前提條件**: plan.md (必填)、spec.md (使用者故事必填)、research.md、data-model.md、contracts/
 
-**Tests**: The examples below include test tasks. Tests are OPTIONAL - only include them if explicitly requested in the feature specification.
+**測試**: 下方範例包含測試任務。測試為選填 - 僅在功能規格中明確要求時才包含。
 
-**Organization**: Tasks are grouped by user story to enable independent implementation and testing of each story.
+**組織**: 任務依使用者故事分組，以便獨立實作和測試每個故事。
 
-## Format: `[ID] [P?] [Story] Description`
+> **⚠️ 重要**: 本文件必須使用台灣正體中文撰寫（符合憲法原則 VII）。所有任務描述、標題、組織說明均應使用繁體中文，確保團隊對實作流程的共同理解。
 
-- **[P]**: Can run in parallel (different files, no dependencies)
-- **[Story]**: Which user story this task belongs to (e.g., US1, US2, US3)
-- Include exact file paths in descriptions
+## 格式：`[ID] [P?] [Story] 描述`
 
-## Path Conventions
+- **[P]**: 可並行執行（不同檔案、無相依性）
+- **[Story]**: 此任務屬於哪個使用者故事（例如 US1、US2、US3）
+- 在描述中包含精確的檔案路徑
 
-- **Single project**: `src/`, `tests/` at repository root
-- **Web app**: `backend/src/`, `frontend/src/`
-- **Mobile**: `api/src/`, `ios/src/` or `android/src/`
-- Paths shown below assume single project - adjust based on plan.md structure
+## 路徑約定
+
+- **單一專案**: `src/`、`tests/` 於儲存庫根目錄
+- **Web 應用**: `backend/src/`、`frontend/src/`
+- **行動裝置**: `api/src/`、`ios/src/` 或 `android/src/`
+- 下方路徑假設為單一專案 - 根據 plan.md 結構調整
 
 <!-- 
   ============================================================================
-  IMPORTANT: The tasks below are SAMPLE TASKS for illustration purposes only.
+  重要：下方任務僅為說明用途。
   
-  The /speckit.tasks command MUST replace these with actual tasks based on:
-  - User stories from spec.md (with their priorities P1, P2, P3...)
-  - Feature requirements from plan.md
-  - Entities from data-model.md
-  - Endpoints from contracts/
+  /speckit.tasks 命令必須基於下列內容替換為實際任務：
+  - spec.md 的使用者故事 (附其優先級 P1, P2, P3...)
+  - plan.md 的功能需求
+  - data-model.md 的實體
+  - contracts/ 的端點
   
-  Tasks MUST be organized by user story so each story can be:
-  - Implemented independently
-  - Tested independently
-  - Delivered as an MVP increment
+  任務必須依使用者故事組織，使每個故事可以：
+  - 獨立實作
+  - 獨立測試
+  - 作為 MVP 增量獨立交付
   
-  DO NOT keep these sample tasks in the generated tasks.md file.
+  不要在最終 tasks.md 檔案中保留這些範例任務。
   ============================================================================
 -->
 
-## Phase 1: Setup (Shared Infrastructure)
+## 第 1 階段：設定 (共享基礎架構)
 
-**Purpose**: Project initialization and basic structure
+**目的**: 專案初始化和基本結構
 
-- [ ] T001 Create project structure per implementation plan
-- [ ] T002 Initialize [language] project with [framework] dependencies
-- [ ] T003 [P] Configure linting and formatting tools
-
----
-
-## Phase 2: Foundational (Blocking Prerequisites)
-
-**Purpose**: Core infrastructure that MUST be complete before ANY user story can be implemented
-
-**⚠️ CRITICAL**: No user story work can begin until this phase is complete
-
-Examples of foundational tasks (adjust based on your project):
-
-- [ ] T004 Setup database schema and migrations framework
-- [ ] T005 [P] Implement authentication/authorization framework
-- [ ] T006 [P] Setup API routing and middleware structure
-- [ ] T007 Create base models/entities that all stories depend on
-- [ ] T008 Configure error handling and logging infrastructure
-- [ ] T009 Setup environment configuration management
-
-**Checkpoint**: Foundation ready - user story implementation can now begin in parallel
+- [ ] T001 按照實作計畫建立專案結構
+- [ ] T002 初始化 [語言] 專案及 [框架] 相依套件
+- [ ] T003 [P] 配置 linting 和格式化工具
 
 ---
 
-## Phase 3: User Story 1 - [Title] (Priority: P1) 🎯 MVP
+## 第 2 階段：基礎 (阻礙性前提條件)
 
-**Goal**: [Brief description of what this story delivers]
+**目的**: 任何使用者故事實作前必須完成的核心基礎架構
 
-**Independent Test**: [How to verify this story works on its own]
+**⚠️ 重大**: 在此階段完成前無使用者故事工作可開始
 
-### Tests for User Story 1 (OPTIONAL - only if tests requested) ⚠️
+基礎任務範例（根據專案調整）：
 
-> **NOTE: Write these tests FIRST, ensure they FAIL before implementation**
+- [ ] T004 設定資料模型和相依框架
+- [ ] T005 [P] 實作狀態管理框架
+- [ ] T006 [P] 設定視圖層級和元件結構
+- [ ] T007 建立所有故事依賴的基本模型/實體
+- [ ] T008 配置錯誤處理和日誌基礎架構
+- [ ] T009 設定環境組態管理
 
-- [ ] T010 [P] [US1] Contract test for [endpoint] in tests/contract/test_[name].py
-- [ ] T011 [P] [US1] Integration test for [user journey] in tests/integration/test_[name].py
+**檢查點**: 基礎準備好 - 使用者故事實作現可開始並行進行
 
-### Implementation for User Story 1
+---
 
-- [ ] T012 [P] [US1] Create [Entity1] model in src/models/[entity1].py
-- [ ] T013 [P] [US1] Create [Entity2] model in src/models/[entity2].py
-- [ ] T014 [US1] Implement [Service] in src/services/[service].py (depends on T012, T013)
-- [ ] T015 [US1] Implement [endpoint/feature] in src/[location]/[file].py
-- [ ] T016 [US1] Add validation and error handling
-- [ ] T017 [US1] Add logging for user story 1 operations
+## 第 3 階段：使用者故事 1 - [標題] (優先級: P1) 🎯 MVP
 
-**Checkpoint**: At this point, User Story 1 should be fully functional and testable independently
+**目標**: [本故事交付內容簡述]
+
+**獨立測試**: [如何驗證此故事獨立運作]
+
+### 使用者故事 1 測試 (選填 - 僅在測試被明確要求時) ⚠️
+
+> **備註：先寫這些測試，確保它們失敗再實作**
+
+- [ ] T010 [P] [US1] [端點] 契約測試於 tests/contract/test_[name].swift
+- [ ] T011 [P] [US1] [使用者旅程] 整合測試於 tests/integration/test_[name].swift
+
+### 使用者故事 1 實作
+
+- [ ] T012 [P] [US1] 於 IdeaBox/Models/[entity1].swift 建立 [Entity1] 模型
+- [ ] T013 [P] [US1] 於 IdeaBox/Models/[entity2].swift 建立 [Entity2] 模型
+- [ ] T014 [US1] 於 IdeaBox/Services/[service].swift 實作 [Service] (相依 T012、T013)
+- [ ] T015 [US1] 於 IdeaBox/Views/[view].swift 實作 [視圖/功能]
+- [ ] T016 [US1] 新增驗證和錯誤處理
+- [ ] T017 [US1] 為使用者故事 1 操作新增日誌
+
+**檢查點**: 此時使用者故事 1 應完全可運作且獨立可測試
 
 ---
 
