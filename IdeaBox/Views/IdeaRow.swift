@@ -10,6 +10,7 @@ import SwiftData
 
 struct IdeaRow: View {
     @Bindable var idea: Idea
+    var onEdit: ((Idea) -> Void)?
 
     var body: some View {
         HStack(alignment: .top, spacing: 12) {
@@ -33,10 +34,19 @@ struct IdeaRow: View {
                         .lineLimit(2)
                 }
             }
+
+            Spacer()
+
+            Button(action: { onEdit?(idea) }) {
+                Image(systemName: "pencil")
+                    .font(.headline)
+                    .foregroundStyle(.blue)
+            }
+            .buttonStyle(.plain)
         }
         .padding(.vertical, 4)
     }
-    
+
     private func toggleCompletion() {
         idea.isCompleted.toggle()
         idea.updatedAt = Date()

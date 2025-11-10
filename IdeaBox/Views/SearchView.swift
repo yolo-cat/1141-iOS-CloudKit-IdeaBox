@@ -12,6 +12,7 @@ struct SearchView: View {
     @Environment(\.modelContext) private var modelContext
     @Query private var allIdeas: [Idea]
     @State private var searchText = ""
+    @Binding var ideaToEdit: Idea?
 
     var filteredIdeas: [Idea] {
         if searchText.isEmpty {
@@ -37,7 +38,7 @@ struct SearchView: View {
                 } else {
                     List {
                         ForEach(filteredIdeas) { idea in
-                            IdeaRow(idea: idea)
+                            IdeaRow(idea: idea, onEdit: { ideaToEdit = $0 })
                         }
                     }
                 }
@@ -49,6 +50,8 @@ struct SearchView: View {
 }
 
 #Preview {
-    SearchView()
+    @Previewable @State var ideaToEdit: Idea?
+
+    SearchView(ideaToEdit: $ideaToEdit)
         .modelContainer(for: Idea.self, inMemory: true)
 }

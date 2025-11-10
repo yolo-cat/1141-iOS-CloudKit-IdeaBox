@@ -12,12 +12,13 @@ struct AllIdeasView: View {
     @Environment(\.modelContext) private var modelContext
     @Query(sort: \Idea.createdAt, order: .reverse) private var ideas: [Idea]
     @Binding var showingAddIdea: Bool
+    @Binding var ideaToEdit: Idea?
 
     var body: some View {
         NavigationStack {
             List {
                 ForEach(ideas) { idea in
-                    IdeaRow(idea: idea)
+                    IdeaRow(idea: idea, onEdit: { ideaToEdit = $0 })
                 }
                 .onDelete(perform: deleteIdeas)
             }
@@ -41,7 +42,8 @@ struct AllIdeasView: View {
 
 #Preview {
     @Previewable @State var showingAdd = false
+    @Previewable @State var ideaToEdit: Idea?
 
-    AllIdeasView(showingAddIdea: $showingAdd)
+    AllIdeasView(showingAddIdea: $showingAdd, ideaToEdit: $ideaToEdit)
         .modelContainer(for: Idea.self, inMemory: true)
 }

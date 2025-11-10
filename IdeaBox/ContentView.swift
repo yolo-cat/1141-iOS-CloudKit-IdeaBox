@@ -11,23 +11,27 @@ import SwiftData
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
     @State private var showingAddIdea = false
+    @State private var ideaToEdit: Idea?
 
     var body: some View {
         TabView {
             Tab("All", systemImage: "list.bullet") {
-                AllIdeasView(showingAddIdea: $showingAddIdea)
+                AllIdeasView(showingAddIdea: $showingAddIdea, ideaToEdit: $ideaToEdit)
             }
 
             Tab("Completed", systemImage: "checkmark.circle.fill") {
-                CompletedIdeasView()
+                CompletedIdeasView(ideaToEdit: $ideaToEdit)
             }
 
             Tab("Search", systemImage: "magnifyingglass", role: .search) {
-                SearchView()
+                SearchView(ideaToEdit: $ideaToEdit)
             }
         }
         .sheet(isPresented: $showingAddIdea) {
-            AddIdeaSheet()
+            AddIdeaSheet(ideaToEdit: nil)
+        }
+        .sheet(item: $ideaToEdit) { idea in
+            AddIdeaSheet(ideaToEdit: idea)
         }
     }
 }

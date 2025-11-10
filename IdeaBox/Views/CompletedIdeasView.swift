@@ -10,8 +10,9 @@ import SwiftData
 
 struct CompletedIdeasView: View {
     @Environment(\.modelContext) private var modelContext
-    @Query(filter: #Predicate<Idea> { $0.isCompleted == true }, sort: \Idea.updatedAt, order: .reverse) 
+    @Query(filter: #Predicate<Idea> { $0.isCompleted == true }, sort: \Idea.updatedAt, order: .reverse)
     private var completedIdeas: [Idea]
+    @Binding var ideaToEdit: Idea?
 
     var body: some View {
         NavigationStack {
@@ -25,7 +26,7 @@ struct CompletedIdeasView: View {
                 } else {
                     List {
                         ForEach(completedIdeas) { idea in
-                            IdeaRow(idea: idea)
+                            IdeaRow(idea: idea, onEdit: { ideaToEdit = $0 })
                         }
                         .onDelete(perform: deleteIdeas)
                     }
@@ -43,6 +44,8 @@ struct CompletedIdeasView: View {
 }
 
 #Preview {
-    CompletedIdeasView()
+    @Previewable @State var ideaToEdit: Idea?
+
+    CompletedIdeasView(ideaToEdit: $ideaToEdit)
         .modelContainer(for: Idea.self, inMemory: true)
 }
