@@ -91,6 +91,7 @@ iOSInjectionProject/
 
 ## macOS
 .DS_Store
+Thumbs.db
 
 ## IDEs
 .vscode/
@@ -98,3 +99,12 @@ iOSInjectionProject/
 *.swp
 *.swo
 *~
+
+## Swift/SwiftData
+*.swiftpm/
+.swiftpm/
+*.prof*
+
+## Environment & Logs
+.env*
+*.log

@@ -6,33 +6,37 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct ContentView: View {
-    @State private var ideas = Idea.mockIdeas
+    @Environment(\.modelContext) private var modelContext
     @State private var showingAddIdea = false
+    @State private var ideaToEdit: Idea?
 
     var body: some View {
         TabView {
             Tab("All", systemImage: "list.bullet") {
-                AllIdeasView(ideas: $ideas, showingAddIdea: $showingAddIdea)
+                AllIdeasView(showingAddIdea: $showingAddIdea, ideaToEdit: $ideaToEdit)
             }
 
             Tab("Completed", systemImage: "checkmark.circle.fill") {
-                CompletedIdeasView(ideas: $ideas)
+                CompletedIdeasView(ideaToEdit: $ideaToEdit)
             }
 
             Tab("Search", systemImage: "magnifyingglass", role: .search) {
-                SearchView(ideas: $ideas)
+                SearchView(ideaToEdit: $ideaToEdit)
             }
         }
         .sheet(isPresented: $showingAddIdea) {
-            AddIdeaSheet { newIdea in
-                ideas.insert(newIdea, at: 0)
-            }
+            AddIdeaSheet(ideaToEdit: nil)
+        }
+        .sheet(item: $ideaToEdit) { idea in
+            AddIdeaSheet(ideaToEdit: idea)
         }
     }
 }
 
 #Preview {
     ContentView()
+        .modelContainer(for: Idea.self, inMemory: true)
 }
